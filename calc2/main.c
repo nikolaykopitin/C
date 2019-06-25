@@ -1,3 +1,7 @@
+// main.c
+// Author: Nikolay
+
+
 #include <stdio.h>
 #include <stdlib.h>
 float vectormultiplic()
