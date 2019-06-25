@@ -1,37 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-float vectormultiplic(){
+float vectormultiplic()
+{
     float a,b,c,numformult;
     puts("enter coordinates");
-    scanf("%f %f %f",&a,&b,&c); //Ввод вектора
-    puts("What number do you want to multiply the vector of?");
-    scanf("%f",&numformult);// На какое число нам умножать вектора
+    scanf("%f %f %f",&a,&b,&c);
+    puts("Enter the number to multiply");
+    scanf("%f",&numformult);//число на которое умножать вектора
     a = a * numformult;
     b = b * numformult;
     c = c * numformult;
     return printf("%f %f %f\t",a,b,c);
 }
 
-float vectoroperation() {
-    int sizevector, vectorcommand; // C помощью переменной 'a' задаем длинну вектора, а с помощью переменной g команду для ветторов /сложение/вычитание/умнлжение
+float vectoroperation()
+{
+    int sizevector, vectorcommand; // sizevector - длинна вектора, а с помощью переменной vectorcommand задаётся команда для векторов /сложение/вычитание/умножение
+    float res; // Хранит результат операции над векторами
+    float *vector1 = NULL, *vector2 = NULL; //Два вектора неизвестной длинны.
 
-    float res; //Промежуточный контейнер для хранение результата операции над векторами. Нужен для удобства. Можно убрать при надобности. Убирать я его не хочу
+    puts("V kakom n-mernom prostranstve budut vectora");
+    scanf("%i", &sizevector); //Ввод длины вектора
 
-    float *vector1 = NULL, *vector2 = NULL; //Два вектора незивестной длинны. Для них мы не освобождали память
-
-    puts("V kakom n-mernom prostranstve budut vectora"); //Вычисление векторов может происходить в 2-х мерном пространстве, 3-х мерном и тд
-    scanf("%i", &sizevector); //Пользователь задает длинну вектора
-
-    if (sizevector > 0) {
+    if (sizevector > 0)
+    {
         puts("Vvedite 1 vector");
         vector1 = malloc(sizevector * sizeof(float)); //Выделиние памяти для 3-х чисел типа "float
-        for (int i = 0; i < sizevector; i++) {  //ввод каждого элемента вектора
-            printf("vector1[%d]", i); //Просьба ввести вектор определенного номер
+        for (int i = 0; i < sizevector; i++)
+        {                              //ввод каждого элемента вектора
+            printf("vector1[%d]", i); //Просьба ввести вектор определенного номера
             scanf("%f", &vector1[i]); // Считывание вектора
         }
 
-        puts("Vvedite 2 vector"); //Аналогичные операции и со 2 вектором
         puts("Vvedite 2 vector"); //Аналогичные операции и со 2 вектором
         vector2 = malloc(sizevector * sizeof(float));
         for (int i = 0; i < sizevector; i++) {
@@ -42,42 +42,41 @@ float vectoroperation() {
         puts("What operation do you want to perform?\n"
              "1- Addition\n"
              "2-Subtraction\n"
-             "3- Scalar product"); // Выбор операции с векторами
+             "3- Scalar product");
         scanf("%i", &vectorcommand); //Выбор операции над уже заданными векторами
 
-        switch (vectorcommand) {
+        switch (vectorcommand)
+        {
             case 1:
-                printf("{"); // Скобка для красоты
-                for (int i = 0; i < sizevector; i++) { //Операции с ветором и вывод их на экрна
+                for (int i = 0; i < sizevector; i++)
+                { //Операции с вектором и их вывод
                     res = vector1[i] + vector2[i];
                     printf("%.2f\t", res);
                 }
                 puts("\b}");
-                free(vector1);
-                free(vector2); //Освобождеение памяти
                 break;
             case 2:
-                printf("{"); // Или для удобства
-                for (int i = 0; i < sizevector; i++) { //Операции с ветором и вывод их на экрна
+                for (int i = 0; i < sizevector; i++)
+                {
                     res = vector1[i] - vector2[i];
                     printf("%.2f\t", res);
                 }
                 puts("\b}");
-                free(vector1);
-                free(vector2); //Освобождение памяти
                 break;
             case 3:
                 res = 0;
-                for (int i = 0; i < sizevector; i++) {
+                for (int i = 0; i < sizevector; i++)
+                {
                     res = res + (vector1[i] * vector2[i]);
                 }
                 printf("%.2f\t", res);
-                free(vector1);
-                free(vector2);  //Освобождение памяти
                 break;
         }
+        free(vector1);//Освобождение памяти
+        free(vector2);
     }
-    else {
+    else
+    {
         puts("Vvedite polozhitelnoe znachenie");
     }
     return 0;
@@ -86,13 +85,15 @@ float vectoroperation() {
 int main(void)
 {   float i=0, a=0, b=0;
     int  n;
-    int command, returntry; //Первая переменная это команда, а вторая переменная нужна нам для повторного запуска программы
-    while(1) { //Обернули все в цикл. Потом для выхода из него используем break
-        puts("1-Vichitanie\n2-Slozhenie\n3-Delenie\n4-Umnozhenie\n5-Vozvedenie v stepen\n6-Factorial\n7-vector operation\n8-multiply vector by number\ncommand:");
+    int command, returntry; //Первая переменная это команда, а вторая переменная нужна для повторного запуска программы
+    while(1)
+    {
+        puts("1-Vichitanie\n2-Slozhenie\n3-Delenie\n4-Umnozhenie\n5-Vozvedenie v stepen\n6-Factorial\n7-vector operation\n8-multiply vector by number\nСommand:");
         scanf("%i", &command);
-        if ((command >= 1) && (command <= 8)) { // Проверяем. Не ошибся ли пользователь с командой
-            switch (command) { //Отдельно для других операций
-
+        if ((command >= 1) && (command <= 8)) // Проверка выбора команды
+        { 
+            switch (command)
+            {
                 case 1:
                     puts("Operaciya 'Vichitanie'.");
                     puts("Vvedite pervoe znachenie.");
@@ -118,7 +119,8 @@ int main(void)
                     if (b == 0)
                     {
                         printf("Error!\n");
-                    } else
+                    }
+                    else
                     {
                         printf("X / Y = %f\n", a / b);
                     }
@@ -151,7 +153,9 @@ int main(void)
                     if (a == 0)
                     {
                         printf("X! = 1\n");
-                    } else {
+                    }
+                    else
+                    {
                         i = 1;
                         for (n = 1; n <= a; n++)
                         {
@@ -168,14 +172,19 @@ int main(void)
                     break;
             }
 
-        } else {
+        }
+        else
+        {
             puts("Undefined command");
         }
         puts("Enter '1' if you want to continue or any other word to exit");
-        scanf("%i", &returntry);
-        if (returntry == 1) {
+        scanf("%i", &returntry);// Спрашиваем пользователя что делать дальше
+        if (returntry == 1)
+        {
             continue;
-        } else {
+        }
+        else
+        {
             puts("Program ended");
             break;
         }
